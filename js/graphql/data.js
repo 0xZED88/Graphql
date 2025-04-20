@@ -291,7 +291,7 @@ export async function fetchUserData() {
   }
 
   const queries = {
-    userInfo: `query {
+    userInfo: ` {
       user {
         id
         login
@@ -317,7 +317,7 @@ export async function fetchUserData() {
       }
     }`,
 
-    xpTransactions: `query {
+    xpTransactions: ` {
       transaction(
         where: {
           type: {_eq: "xp"},
@@ -336,7 +336,7 @@ export async function fetchUserData() {
       }
     }`,
 
-    skills: `query {
+    skills: ` {
       skillsTransactions: transaction(
         where: {type: {_regex: "^skill_"}}
         order_by: [{type: asc}, {createdAt: desc}]

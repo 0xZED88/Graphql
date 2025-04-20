@@ -193,7 +193,7 @@ export function renderSkillsChart(containerId, skillsData) {
     "font-size": "18",
     fill: "black",
   });
-  title.textContent = "Skills Progress";
+  //title.textContent = "Skills Progress";
   svg.appendChild(title);
 
   // Create bars for each skill
