@@ -9,6 +9,22 @@ export function createSVGElement(type, attributes = {}) {
   return element;
 }
 
+export function formatShortDate(dateString) {
+  const date = new Date(dateString);
+  const options = { month: "short", day: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+}
+
+export function formatXP(xp) {
+  if (xp >= 1000) {
+    // Round to the nearest thousand and display as kB
+    return Math.round(xp / 1000) + " kB";
+  } else {
+    return xp.toFixed(2) + " XP";
+  }
+}
+
+////////////////////////////// wtf ////////////////////////////////////////////////////////////
 export function groupByDay(transactions) {
   const grouped = {};
 
@@ -30,9 +46,3 @@ export function groupByDay(transactions) {
     (a, b) => new Date(a.date) - new Date(b.date)
   );
 }
-
-export function formatShortDate(dateString) {
-    const date = new Date(dateString);
-    const options = { month: 'short', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  }

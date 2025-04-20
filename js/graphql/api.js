@@ -30,7 +30,6 @@ export async function getUserData() {
       }),
     });
 
-    
     if (!response.ok) {
       throw new Error(`GraphQL request failed: ${response.statusText}`);
     }

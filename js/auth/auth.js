@@ -1,64 +1,54 @@
-export const Auth = {
-  _token: null,
+let authToken;
 
-  init() {
-    const storedToken = localStorage.getItem("jwt");
-    if (storedToken) {
-      this._token = storedToken;
+function initAuth() {
+  authToken = localStorage.getItem("jwt");
+}
+
+// Login function
+export async function loginUser(username, password) {
+  if (!username || !password) {
+    throw new Error("Username and password are required");
+  }
+
+  try {
+    const credentials = btoa(`${username}:${password}`);
+
+    const response = await fetch(
+      "https://learn.zone01oujda.ma/api/auth/signin",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${credentials}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Login failed with status: ${response.status}`);
     }
-  },
 
-  async login(username, password) {
-    try {
-      if (!username || !password) {
-        throw new Error("Username and password are required");
-      }
+    const token = await response.json();
 
-      const credentials = btoa(`${username}:${password}`);
-      const response = await fetch(
-        "https://learn.zone01oujda.ma/api/auth/signin",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Basic ${credentials}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Login failed with status: ${response.status}`);
-      }
-
-      // Directly parse the response as JSON
-      const token = await response.json();
-
-      if (!token) {
-        throw new Error("No token received from server");
-      }
-
-      this._token = token;
-      localStorage.setItem("jwt", token);
-      return true;
-    } catch (error) {
-      console.error("Login error:", error);
-      throw error;
+    if (!token) {
+      throw new Error("No token received from server");
     }
-  },
 
-  logout() {
-    this._token = null;
-    localStorage.removeItem("jwt");
-    window.location.reload();
-  },
+    authToken = token;
+    localStorage.setItem("jwt", token);
+    return true;
+  } catch (error) {
+    //console.error("Login error:", error);
+    throw error;
+  }
+}
 
-  isAuthenticated() {
-    return !!this._token;
-  },
+// Logout function
+export function logoutUser() {
+  authToken = null;
+  localStorage.removeItem("jwt");
+  window.location.reload();
+}
 
-  getToken() {
-    return this._token;
-  },
-};
-
-Auth.init();
+// Initialize on module load
+initAuth();

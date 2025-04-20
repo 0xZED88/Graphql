@@ -1,10 +1,10 @@
-// app.js - Complete working version
-import { Auth } from "./auth/auth.js";
+// Functional app initialization
+import { loginUser, logoutUser } from "./auth/auth.js";
 import { fetchUserData } from "./graphql/data.js";
 import { renderProfile, renderProfileCharts } from "./components/profile.js";
 
 // Initialize the app
-export function initApp() {
+function initApp() {
   try {
     const appContainer = document.getElementById("app");
     if (!appContainer) throw new Error("App container not found");
@@ -27,6 +27,7 @@ export function initApp() {
   }
 }
 
+// Render login page
 function renderLogin() {
   const appContainer = document.getElementById("app");
   if (!appContainer) return;
@@ -45,26 +46,31 @@ function renderLogin() {
 
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
-    loginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const errorElement = document.getElementById("loginError");
-
-      try {
-        errorElement.textContent = "";
-        const success = await Auth.login(username, password);
-        if (success) {
-          renderDashboard();
-        }
-      } catch (error) {
-        console.error("Login failed:", error);
-        errorElement.textContent = error.message;
-      }
-    });
+    loginForm.addEventListener("submit", handleLogin);
   }
 }
 
+// Handle login submission
+async function handleLogin(e) {
+  e.preventDefault();
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const errorElement = document.getElementById("loginError");
+
+  try {
+    errorElement.textContent = "";
+    const success = await loginUser(username, password);
+    if (success) {
+      renderDashboard();
+    }
+  } catch (error) {
+    //console.error("Login failed:", error);
+    errorElement.textContent = "Login failed: invalid credentials";
+    errorElement.style.display = "block";
+  }
+}
+
+// Render dashboard
 async function renderDashboard() {
   const appContainer = document.getElementById("app");
   if (!appContainer) return;
@@ -82,7 +88,7 @@ async function renderDashboard() {
   `;
 
   // Setup logout button
-  document.getElementById("logout")?.addEventListener("click", Auth.logout);
+  document.getElementById("logout")?.addEventListener("click", logoutUser);
 
   try {
     const userData = await fetchUserData();
@@ -92,7 +98,7 @@ async function renderDashboard() {
 
     if (profileElement) {
       profileElement.innerHTML = await renderProfile(userData);
-      renderProfileCharts(userData); // This renders all the charts
+      renderProfileCharts(userData);
     }
   } catch (error) {
     document.getElementById("loading")?.remove();
