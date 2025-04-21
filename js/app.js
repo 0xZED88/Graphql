@@ -1,4 +1,3 @@
-// Functional app initialization
 import { loginUser, logoutUser } from "./auth/auth.js";
 import { fetchUserData } from "./graphql/data.js";
 import { renderProfile, renderProfileCharts } from "./components/profile.js";
