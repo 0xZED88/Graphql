@@ -164,7 +164,7 @@ export function renderBarChart(containerId, projectsData) {
       x: x + barWidth / 2,
       y: height + margin.top + 20,
       "text-anchor": "end",
-      transform: `rotate(-45, ${x + barWidth / 2}, ${
+      transform: `rotate(-35, ${x + barWidth / 2}, ${
         height + margin.top + 20
       })`,
       "font-size": "10",

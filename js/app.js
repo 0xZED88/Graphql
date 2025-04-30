@@ -76,7 +76,7 @@ async function renderDashboard() {
 
   appContainer.innerHTML = `
     <header>
-      <h1>Zone01 Profile</h1>
+      <h1>Student Dashboard</h1>
       <button id="logout">Logout</button>
     </header>
     <main>
@@ -105,7 +105,9 @@ async function renderDashboard() {
     if (errorElement) {
       errorElement.textContent = `Error: ${error.message}`;
     }
-    console.error("Dashboard error:", error);
+    // console.error("Dashboard error:", error);
+    console.log("NO DATA");
+    
   }
 }
 

@@ -34,7 +34,7 @@ export async function renderProfile(userData) {
 
       <!-- Section 3: Ratios -->
       <div class="profile-section ratios-section">
-        <h3>Performance Metrics</h3>
+        <h3>Audit Infos</h3>
         <div class="ratios-details">
           <p><strong>Audit Ratio:</strong> ${user.auditRatio.toFixed(1)}</p>
           
