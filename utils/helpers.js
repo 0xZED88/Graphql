@@ -15,3 +15,4 @@ export function formatXP(xp) {
     return xp.toFixed(2) + " XP";
   }
 }
+

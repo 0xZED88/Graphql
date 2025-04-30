@@ -1,4 +1,4 @@
-let authToken;
+let authToken ;
 
 function initAuth() {
   authToken = localStorage.getItem("jwt");

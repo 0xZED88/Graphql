@@ -7,7 +7,7 @@ export async function renderProfile(userData) {
   }
   console.log(userData);
 
-  const { user, totalXP,  completedProjects } = userData;
+  const { user, totalXP, completedProjects } = userData;
 
   return `
     <div class="profile-container">
@@ -50,7 +50,6 @@ export async function renderProfile(userData) {
     
       <!-- Skills Chart -->
       <div class="chart-card">
-        <h3>Skills Progress</h3>
         <div id="skills-chart" class="chart-content"></div>
       </div>
     </div>

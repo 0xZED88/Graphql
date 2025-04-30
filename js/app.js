@@ -80,7 +80,7 @@ async function renderDashboard() {
       <button id="logout">Logout</button>
     </header>
     <main>
-      <div id="loading">Loading profile...</div>
+      <div id="loading">Fetching....</div>
       <section id="profile"></section>
       <div id="profileError" class="error"></div>
     </main>
@@ -101,13 +101,14 @@ async function renderDashboard() {
     }
   } catch (error) {
     document.getElementById("loading")?.remove();
-    const errorElement = document.getElementById("profileError");
-    if (errorElement) {
-      errorElement.textContent = `Error: ${error.message}`;
+    const main = document.querySelector("main");
+    if (main) {
+      main.innerHTML = `
+        <div class="no-data-container">
+        No Data Found :/
+        </div>
+      `;
     }
-    // console.error("Dashboard error:", error);
-    console.log("NO DATA");
-    
   }
 }
 
