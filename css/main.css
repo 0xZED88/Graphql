@@ -1,6 +1,6 @@
 :root {
   --primary-color: #213448;
-  --danger-color: #f44336;
+  --danger-color: #94B4C1;
   --dark-danger: #d32f2f;
   --dark-primary: #003d82;
   --bg-color: #547792;
@@ -136,7 +136,7 @@ header {
 
 /* Utility Classes */
 .error {
-  display: none; /* Hidden by default */
+  display: none;
   color: var(--danger-color);
   padding: 1rem;
   background-color: #ffebee;

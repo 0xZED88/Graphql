@@ -6,13 +6,6 @@ export function createSVGElement(type, attributes = {}) {
   });
   return element;
 }
-
 export function formatXP(xp) {
-  if (xp >= 1000) {
-    // Round to the nearest thousand and display as kB
-    return Math.round(xp / 1000) + " kB";
-  } else {
-    return xp.toFixed(2) + " XP";
-  }
+  return (xp / 1000).toFixed() + " KB";
 }
-

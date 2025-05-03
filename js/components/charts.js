@@ -10,26 +10,26 @@ export function renderBarChart(containerId, projectsData) {
     return;
   }
 
-  // 2. Prepare data - limit to top 10 projects
+  // limit to top 10 projects
   const topProjects = projectsData.slice(0, 10);
   const maxXP = Math.max(...topProjects.map((p) => p.xp), 1); // Ensure at least 1 to avoid division by zero
 
-  // 3. Create SVG container
+  // Create SVG container
   container.innerHTML = '<svg width="100%" height="400"></svg>';
   const svg = container.querySelector("svg");
   svg.setAttribute("viewBox", "0 0 800 400");
 
-  // 4. Chart dimensions and margins
+  //  Chart dimensions and margins
   const margin = { top: 20, right: 20, bottom: 70, left: 50 };
   const width = 800 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
-  // 5. Calculate bar dimensions
+  // Calculate bar dimensions
   const barWidth = 40;
   const barSpacing =
     (width - barWidth * topProjects.length) / (topProjects.length + 1);
 
-  // 6. Create Y-axis with grid lines
+  // Create Y-axis with grid lines
   for (let i = 0; i <= 5; i++) {
     const yValue = Math.floor((maxXP / 5) * i);
     const yPos = height - (yValue / maxXP) * height + margin.top;
@@ -56,7 +56,7 @@ export function renderBarChart(containerId, projectsData) {
     svg.appendChild(label);
   }
 
-  // 7. Create bars and labels
+  // Create bars and labels
   topProjects.forEach((project, i) => {
     const barHeight = (project.xp / maxXP) * height;
     const x = margin.left + barSpacing + i * (barWidth + barSpacing);
@@ -98,7 +98,6 @@ export function renderBarChart(containerId, projectsData) {
     svg.appendChild(nameLabel);
   });
 
-  // 8. Add axes
   // X-axis line
   svg.appendChild(
     createSVGElement("line", {
@@ -148,8 +147,6 @@ export function renderSkillsChart(containerId, skillsData) {
   title.setAttribute("fill", "black");
   title.textContent = "Skills Progress";
   svg.appendChild(title);
-
-  
 
   // X-axis line
   const lineX = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -235,21 +232,20 @@ export function renderSkillsChart(containerId, skillsData) {
     svg.appendChild(percentLabel);
   });
 
-  // Add Y-axis markers (0%, 25%, 50%, 75%, 100%)
   [0, 25, 50, 75, 100].forEach((percent) => {
     const y = 350 - percent * yScale;
 
     // Add grid line
-    const gridLine = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "line"
-    );
-    gridLine.setAttribute("x1", 30);
-    gridLine.setAttribute("y1", y);
-    gridLine.setAttribute("x2", 600);
-    gridLine.setAttribute("y2", y);
-    gridLine.setAttribute("stroke", "#e0e0e0");
-    svg.appendChild(gridLine);
+    // const gridLine = document.createElementNS(
+    //   "http://www.w3.org/2000/svg",
+    //   "line"
+    // );
+    // gridLine.setAttribute("x1", 30);
+    // gridLine.setAttribute("y1", y);
+    // gridLine.setAttribute("x2", 600);
+    // gridLine.setAttribute("y2", y);
+    // gridLine.setAttribute("stroke", "#e0e0e0");
+    // svg.appendChild(gridLine);
 
     // Add label
     const label = document.createElementNS(

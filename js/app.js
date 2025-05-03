@@ -2,7 +2,7 @@ import { loginUser, logoutUser } from "./auth/auth.js";
 import { fetchUserData } from "./graphql/data.js";
 import { renderProfile, renderProfileCharts } from "./components/profile.js";
 
-// Initialize the app
+
 function initApp() {
   try {
     const appContainer = document.getElementById("app");
@@ -15,6 +15,7 @@ function initApp() {
       renderLogin();
     }
   } catch (error) {
+    
     console.error("App initialization failed:", error);
     document.body.innerHTML = `
       <div class="error">
@@ -26,7 +27,6 @@ function initApp() {
   }
 }
 
-// Render login page
 function renderLogin() {
   const appContainer = document.getElementById("app");
   if (!appContainer) return;
@@ -49,7 +49,6 @@ function renderLogin() {
   }
 }
 
-// Handle login submission
 async function handleLogin(e) {
   e.preventDefault();
   const username = document.getElementById("username").value;
@@ -112,5 +111,4 @@ async function renderDashboard() {
   }
 }
 
-// Start the app
 document.addEventListener("DOMContentLoaded", initApp);

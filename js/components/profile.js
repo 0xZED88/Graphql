@@ -7,7 +7,7 @@ export async function renderProfile(userData) {
   }
   console.log(userData);
 
-  const { user, totalXP, completedProjects } = userData;
+  const { user, totalXP } = userData;
 
   return `
     <div class="profile-container">
@@ -38,7 +38,6 @@ export async function renderProfile(userData) {
         <div class="ratios-details">
           <p><strong>Audit Ratio:</strong> ${user.auditRatio.toFixed(1)}</p>
           
-          <p><strong>Completed Projects:</strong> ${completedProjects}</p>
         </div>
       </div>
 
@@ -55,6 +54,8 @@ export async function renderProfile(userData) {
     </div>
   `;
 }
+
+
 
 export function renderProfileCharts(data) {
   setTimeout(() => {

@@ -1,10 +1,10 @@
-let authToken ;
+let authToken;
+let intra = "https://learn.zone01oujda.ma/api/auth/signin";
 
 function initAuth() {
   authToken = localStorage.getItem("jwt");
 }
 
-// Login function
 export async function loginUser(username, password) {
   if (!username || !password) {
     throw new Error("Username and password are required");
@@ -13,16 +13,13 @@ export async function loginUser(username, password) {
   try {
     const credentials = btoa(`${username}:${password}`);
 
-    const response = await fetch(
-      "https://learn.zone01oujda.ma/api/auth/signin",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Basic ${credentials}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(intra, {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${credentials}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Login failed with status: ${response.status}`);
@@ -43,12 +40,10 @@ export async function loginUser(username, password) {
   }
 }
 
-// Logout function
 export function logoutUser() {
   authToken = null;
   localStorage.removeItem("jwt");
   window.location.reload();
 }
 
-// Initialize on module load
 initAuth();
