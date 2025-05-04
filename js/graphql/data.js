@@ -1,3 +1,5 @@
+import { renderLogin } from "../app.js";
+
 const GRAPHQL_ENDPOINT =
   "https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql";
 
@@ -65,8 +67,7 @@ export async function fetchUserData() {
       skills: skillsData.data.skillsTransactions,
     };
   } catch (error) {
-    console.error("Failed to fetch user data:", error);
-    throw error;
+    renderLogin();
   }
 }
 
@@ -98,13 +99,14 @@ async function makeGraphQLRequest(token, query) {
   });
 
   if (!response.ok) {
-    throw new Error(`GraphQL request failed: ${response.statusText}`);
+    throw new Error("JWT invalid");
   }
 
-  const { data, errors } = await response.json();
-  if (errors) {
-    throw new Error(errors[0].message || "GraphQL error");
+  const result = await response.json();
+
+  if (result.errors) {
+    throw new Error("JWT invalid");
   }
 
-  return { data };
+  return result;
 }

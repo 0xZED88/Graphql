@@ -2,7 +2,6 @@ import { loginUser, logoutUser } from "./auth/auth.js";
 import { fetchUserData } from "./graphql/data.js";
 import { renderProfile, renderProfileCharts } from "./components/profile.js";
 
-
 function initApp() {
   try {
     const appContainer = document.getElementById("app");
@@ -15,7 +14,6 @@ function initApp() {
       renderLogin();
     }
   } catch (error) {
-    
     console.error("App initialization failed:", error);
     document.body.innerHTML = `
       <div class="error">
@@ -27,7 +25,7 @@ function initApp() {
   }
 }
 
-function renderLogin() {
+export function renderLogin() {
   const appContainer = document.getElementById("app");
   if (!appContainer) return;
 
@@ -69,6 +67,48 @@ async function handleLogin(e) {
 }
 
 // Render dashboard
+// async function renderDashboard() {
+//   const appContainer = document.getElementById("app");
+//   if (!appContainer) return;
+
+//   appContainer.innerHTML = `
+//     <header>
+//       <h1>Student Dashboard</h1>
+//       <button id="logout">Logout</button>
+//     </header>
+//     <main>
+//       <div id="loading">Fetching....</div>
+//       <section id="profile"></section>
+//       <div id="profileError" class="error"></div>
+//     </main>
+//   `;
+
+//   // Setup logout button
+//   document.getElementById("logout")?.addEventListener("click", logoutUser);
+
+//   try {
+//     const userData = await fetchUserData();
+//     const profileElement = document.getElementById("profile");
+
+//     document.getElementById("loading")?.remove();
+
+//     if (profileElement) {
+//       profileElement.innerHTML = await renderProfile(userData);
+//       renderProfileCharts(userData);
+//     }
+//   } catch (error) {
+//     document.getElementById("loading")?.remove();
+//     const main = document.querySelector("main");
+//     if (main) {
+//       main.innerHTML = `
+//         <div class="no-data-container">
+//         No Data Found :/
+//         </div>
+//       `;
+//     }
+//   }
+// }
+
 async function renderDashboard() {
   const appContainer = document.getElementById("app");
   if (!appContainer) return;
@@ -100,6 +140,7 @@ async function renderDashboard() {
     }
   } catch (error) {
     document.getElementById("loading")?.remove();
+
     const main = document.querySelector("main");
     if (main) {
       main.innerHTML = `
