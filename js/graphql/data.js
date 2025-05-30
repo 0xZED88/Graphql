@@ -37,15 +37,15 @@ export async function fetchUserData() {
     }`,
 
     skills: ` {
-      skillsTransactions: transaction(
-        where: {type: {_regex: "^skill_"}}
-        order_by: [{type: asc}, {createdAt: desc}]
-        distinct_on: type
-      ) {
-        type
-        amount
-      }
-    }`,
+  skillsTransactions: transaction(
+    distinct_on: type
+    where: {type: {_like: "skill_%"}}
+    order_by: [{type: asc}, {amount: desc}]
+  ) {
+    type
+    amount
+  }
+}`,
   };
 
   try {
