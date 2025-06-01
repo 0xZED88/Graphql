@@ -6,6 +6,15 @@ export function createSVGElement(type, attributes = {}) {
   });
   return element;
 }
+// export function formatXP(xp) {
+//   return (xp / 1000).toFixed() + " KB";
+// }
+
 export function formatXP(xp) {
-  return (xp / 1000).toFixed() + " KB";
+  if (xp >= 1000000) {
+    return (xp / 1000000).toFixed(1) + " MB";
+  } else if (xp >= 1000) {
+    return (xp / 1000).toFixed() + " KB";
+  }
+  return xp.toString();
 }
