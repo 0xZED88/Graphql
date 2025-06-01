@@ -2,125 +2,6 @@ import { createSVGElement } from "../../utils/helpers.js";
 
 ////////////////////////////////////////////// FIRST GRAPH (BAR) ////////////////////////////////////////////////
 
-// export function renderBarChart(containerId, projectsData) {
-//   const container = document.getElementById(containerId);
-//   if (!container || !projectsData?.length) {
-//     container.innerHTML =
-//       '<div class="chart-placeholder">No project data</div>';
-//     return;
-//   }
-
-//   // limit to top 10 projects
-//   const topProjects = projectsData.slice(0, 10);
-//   const maxXP = Math.max(...topProjects.map((p) => p.xp), 1); // Ensure at least 1 to avoid division by zero
-
-//   // Create SVG container
-//   container.innerHTML = '<svg width="100%" height="400"></svg>';
-//   const svg = container.querySelector("svg");
-//   svg.setAttribute("viewBox", "0 0 800 400");
-
-//   //  Chart dimensions and margins
-//   const margin = { top: 20, right: 20, bottom: 70, left: 50 };
-//   const width = 800 - margin.left - margin.right;
-//   const height = 400 - margin.top - margin.bottom;
-
-//   // Calculate bar dimensions
-//   const barWidth = 40;
-//   const barSpacing =
-//     (width - barWidth * topProjects.length) / (topProjects.length + 1);
-
-//   // Create Y-axis with grid lines
-//   for (let i = 0; i <= 5; i++) {
-//     const yValue = Math.floor((maxXP / 5) * i);
-//     const yPos = height - (yValue / maxXP) * height + margin.top;
-
-//     // Grid line
-//     svg.appendChild(
-//       createSVGElement("line", {
-//         x1: margin.left,
-//         y1: yPos,
-//         x2: width + margin.left,
-//         y2: yPos,
-//         stroke: "#e0e0e0",
-//       })
-//     );
-
-//     // Y-axis label
-//     const label = createSVGElement("text", {
-//       x: margin.left - 10,
-//       y: yPos + 5,
-//       "text-anchor": "end",
-//       "font-size": "12",
-//     });
-//     label.textContent = yValue.toLocaleString();
-//     svg.appendChild(label);
-//   }
-
-//   // Create bars and labels
-//   topProjects.forEach((project, i) => {
-//     const barHeight = (project.xp / maxXP) * height;
-//     const x = margin.left + barSpacing + i * (barWidth + barSpacing);
-//     const y = height - barHeight + margin.top;
-
-//     // Create bar
-//     svg.appendChild(
-//       createSVGElement("rect", {
-//         x,
-//         y,
-//         width: barWidth,
-//         height: barHeight,
-//         fill: "#0052B4",
-//         rx: "2", // Rounded corners
-//       })
-//     );
-
-//     // XP value label
-//     const valueLabel = createSVGElement("text", {
-//       x: x + barWidth / 2,
-//       y: y - 5,
-//       "text-anchor": "middle",
-//       "font-size": "10",
-//     });
-//     valueLabel.textContent = project.xp.toLocaleString();
-//     svg.appendChild(valueLabel);
-
-//     // Project name label
-//     const nameLabel = createSVGElement("text", {
-//       x: x + barWidth / 2,
-//       y: height + margin.top + 20,
-//       "text-anchor": "end",
-//       transform: `rotate(-35, ${x + barWidth / 2}, ${
-//         height + margin.top + 20
-//       })`,
-//       "font-size": "10",
-//     });
-//     nameLabel.textContent = project.name;
-//     svg.appendChild(nameLabel);
-//   });
-
-//   // X-axis line
-//   svg.appendChild(
-//     createSVGElement("line", {
-//       x1: margin.left,
-//       y1: height + margin.top,
-//       x2: width + margin.left,
-//       y2: height + margin.top,
-//       stroke: "black",
-//     })
-//   );
-
-//   // Y-axis line
-//   svg.appendChild(
-//     createSVGElement("line", {
-//       x1: margin.left,
-//       y1: margin.top,
-//       x2: margin.left,
-//       y2: height + margin.top,
-//       stroke: "black",
-//     })
-//   );
-// }
-
 export function renderBarChart(containerId, projectsData) {
   const container = document.getElementById(containerId);
   if (!container || !projectsData?.length) {
@@ -131,7 +12,7 @@ export function renderBarChart(containerId, projectsData) {
 
   // limit to top 10 projects
   const topProjects = projectsData.slice(0, 10);
-  const maxXP = Math.max(...topProjects.map((p) => p.xp), 1); // Ensure at least 1 to avoid division by zero
+  const maxXP = Math.max(...topProjects.map((p) => p.xp), 1);
 
   // Create SVG container
   container.innerHTML = '<svg width="100%" height="400"></svg>';
@@ -177,7 +58,7 @@ export function renderBarChart(containerId, projectsData) {
       })
     );
 
-    // XP value label
+    // XP value flbars
     const valueLabel = createSVGElement("text", {
       x: x + barWidth / 2,
       y: y - 5,
@@ -187,7 +68,7 @@ export function renderBarChart(containerId, projectsData) {
     valueLabel.textContent = project.xp.toLocaleString();
     svg.appendChild(valueLabel);
 
-    // Project name label
+    // Project name
     const nameLabel = createSVGElement("text", {
       x: x + barWidth / 2,
       y: height + margin.top + 20,
@@ -268,13 +149,13 @@ export function renderSkillsChart(containerId, skillsData) {
   lineY.setAttribute("stroke", "black");
   svg.appendChild(lineY);
 
-  // Sort skills alphabetically for better presentation
+  // Sort skills alphabetically
   const sortedSkills = [...skillsData].sort((a, b) =>
     a.type.localeCompare(b.type)
   );
 
   // Calculate spacing between skills on X-axis
-  const xScale = 570 / (sortedSkills.length - 1);
+  const xScale = 500 / (sortedSkills.length - 1);
   const yScale = 300 / 100; // 100% is max value
 
   // Build the polyline points

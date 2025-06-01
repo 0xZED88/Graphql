@@ -6,15 +6,17 @@ export function createSVGElement(type, attributes = {}) {
   });
   return element;
 }
-// export function formatXP(xp) {
-//   return (xp / 1000).toFixed() + " KB";
-// }
-
 export function formatXP(xp) {
-  if (xp >= 1000000) {
-    return (xp / 1000000).toFixed(1) + " MB";
-  } else if (xp >= 1000) {
-    return (xp / 1000).toFixed() + " KB";
-  }
-  return xp.toString();
+  return (xp / 1000).toFixed() + " KB";
 }
+
+// export function formatXP(xp) {
+//   if (xp >= 1000000) {
+//     // Special conversion factor to match school's calculation
+//     const mb = (xp / 1090000).toFixed(2);
+//     return `${mb} MB`;
+//   } else if (xp >= 1000) {
+//     return `${Math.ceil(xp / 1000)} KB`;
+//   }
+//   return `${xp} B`;
+// }
