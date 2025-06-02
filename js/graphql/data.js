@@ -1,6 +1,6 @@
 import { renderLogin } from "../app.js";
 
-const GRAPHQL_ENDPOINT =
+const GraphiQL =
   "https://learn.zone01oujda.ma/api/graphql-engine/v1/graphql";
 
 export async function fetchUserData() {
@@ -67,7 +67,8 @@ export async function fetchUserData() {
       skills: skillsData.data.skillsTransactions,
     };
   } catch (error) {
-    renderLogin();
+    alert(error)
+    renderLogin()
   }
 }
 
@@ -89,7 +90,7 @@ function processXPData(transactions) {
 }
 
 async function makeGraphQLRequest(token, query) {
-  const response = await fetch(GRAPHQL_ENDPOINT, {
+  const response = await fetch(GraphiQL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
